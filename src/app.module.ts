@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { NinRegistrationModule } from './nin-registration/nin-registration.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(),NinRegistrationModule],
+  imports: [TypeOrmModule.forRoot(), NinRegistrationModule],
   controllers: [AppController],
   providers: [AppService],
 })

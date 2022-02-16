@@ -9,6 +9,7 @@ export class CitizensController {
 
   @Post()
   create(@Body() createCitizenDto: CreateCitizenDto) {
+    console.log(JSON.stringify(createCitizenDto))
     return this.citizensService.create(createCitizenDto);
   }
 

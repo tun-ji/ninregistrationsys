@@ -29,7 +29,7 @@ export class CitizensService {
   }
 
   async findAll() {
-    return await this.citizenRepository.find()
+    return await this.citizenRepository.find({relations: ["linkedIdentity"]})
   }
 
   async findOne(id: number) {

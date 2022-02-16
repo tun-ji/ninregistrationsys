@@ -113,7 +113,7 @@
 
                 <div class="field is-grouped">
                     <div class="control">
-                        <button type="submit" submitCreateCitizenForm" class="button is-link is-small">Submit</button>
+                        <button type="submit" id = "submitCreateCitizenForm" class="button is-link is-small">Submit</button>
                     </div>
                     <div class="control">
                         <button type="reset" class="button is-light is-small">Clear</button>
@@ -139,15 +139,12 @@
     </div>
 </section>
 
-
-
 <script>
     const createCitizen = document.getElementById('createCitizenForm');
 
     createCitizen.addEventListener('submit', (event) => {
-        alert('submit clicked')
+        
         event.preventDefault();
-
         //Get fields and check validities
         const firstName = document.getElementById('firstName').value;
         if (firstName == '') {
@@ -163,21 +160,21 @@
             return false;
         }
 
-        const email = document.getElementById('email').value;
-        if (email == '') {
-            email.reportValidity();
-            return false;
-        }
-
         const dateOfBirth = document.getElementById('dateOfBirth').value;
         if (dateOfBirth == '') {
             dateOfBirth.reportValidity();
             return false;
         }
 
+        const countryOfBirth = document.getElementById('countryOfBirth').value;
+
+        const stateOfBirth = document.getElementById('stateOfBirth').value;
+
+        const townOfBirth = document.getElementById('townOfBirth').value;
+
         const nationality = document.getElementById('nationality').value;
 
-        const address = document.getElementById('address').value;
+        const residenceAddress = document.getElementById('residenceAddress').value;
 
         const profession = document.getElementById('profession').value;
 
@@ -198,7 +195,7 @@
                 'Content-Type': 'application/json'
             },
             //credentials: 'same-origin',
-            body: JSON.stringify({ firstName, middleName, lastName, email, dateOfBirth, nationality, address, profession, linkedIdentity: { nin, bvn, mobile_number } })
+            body: JSON.stringify({ firstName, middleName, lastName, dateOfBirth, nationality, countryOfBirth, stateOfBirth, townOfBirth, residenceAddress, profession, linkedIdentity: { nin, bvn, mobile_number } })
         }
 
         //call fetch
@@ -230,4 +227,7 @@
     })
 
 </script>
+
+
+
 {% endblock %}
