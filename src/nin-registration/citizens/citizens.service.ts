@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { LinkedIdentity } from '../linked-identities/entities/linked-identity.entity';
@@ -17,14 +17,14 @@ export class CitizensService {
   ){}
 
   async create(createCitizenDto: CreateCitizenDto) {
-    const newCit: Citizen = this.citizenRepository.create(createCitizenDto)
+    const newCit = this.citizenRepository.create(createCitizenDto)
 
     if (createCitizenDto.linkedIdentity){
       const newLinkedIdentity = this.linkedIdentityRepository.create(createCitizenDto.linkedIdentity)
       const linkedIdentity: LinkedIdentity = await this.linkedIdentityRepository.save(newLinkedIdentity)
 
       newCit.linkedIdentity = linkedIdentity
-    }
+    } 
     return this.citizenRepository.save(newCit)
   }
 
@@ -47,9 +47,28 @@ export class CitizensService {
   async setCitizenbyId(citizenId: number, linkedIdentityID: number) {
     try {
       return await this.citizenRepository.createQueryBuilder()
-      .relation(Citizen, "linkedIdentity")
-      .of(citizenId)
-      .set(linkedIdentityID)
+        .relation(Citizen, "linkedIdentity")
+        .of(citizenId)
+        .set(linkedIdentityID)
+    } catch(error) {
+      throw new HttpException({
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        error: `There was a problem setting user for citizen: ${error.message}`,
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
     }
+  }
+
+  async unsetCitizenbyId(citizenId: number) {
+    try {
+      return await this.citizenRepository.createQueryBuilder()
+        .relation(Citizen, "linkedIdentity")
+        .of(citizenId)
+        .set(null)
+    } catch(error) {
+      throw new HttpException({
+      status: HttpStatus.INTERNAL_SERVER_ERROR,
+      error: `There was a problem setting user for citizen: ${error.message}`,
+      }, HttpStatus.INTERNAL_SERVER_ERROR)
+    };
   }
 }

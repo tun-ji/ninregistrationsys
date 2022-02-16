@@ -17,7 +17,6 @@ export class LinkedIdentity {
     @Column()
     mobile_number: string
 
-    @JoinColumn()
-    @OneToOne(type => Citizen, citizen => citizen.linkedIdentity , {cascade:true})
+    @OneToOne(type => Citizen, citizen => citizen.linkedIdentity)
     citizen: Citizen 
 }

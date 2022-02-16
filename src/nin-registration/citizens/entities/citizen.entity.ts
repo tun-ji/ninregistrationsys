@@ -38,6 +38,6 @@ export class Citizen {
     profession: string
 
     @JoinColumn()
-    @OneToOne(type => LinkedIdentity, LinkedIdentity => LinkedIdentity.citizen)
+    @OneToOne(type => LinkedIdentity, LinkedIdentity => LinkedIdentity.citizen, {cascade:true})
     linkedIdentity: LinkedIdentity
 }

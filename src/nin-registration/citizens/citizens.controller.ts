@@ -16,7 +16,7 @@ export class CitizensController {
   @Render('citizens/create-citizen')
   createForm(){}
 
-  @Get('all')
+  @Get()
   findAll() {
     return this.citizensService.findAll();
   }
@@ -34,5 +34,15 @@ export class CitizensController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.citizensService.remove(+id);
+  }
+
+  @Patch(':citizenID/linked-identity/linked-identityID')
+  setUserById(@Param('citizenID') citizenID: string, @Param('citizen-ID') LinkedIdentityID: string) {
+    return this.citizensService.setCitizenbyId(+citizenID,+LinkedIdentityID);
+  }
+
+  @Delete(':citizenID/user')
+  unsetUserById(@Param('citizenID') citizenID:string) {
+    return this.citizensService.unsetCitizenbyId(+citizenID);
   }
 }

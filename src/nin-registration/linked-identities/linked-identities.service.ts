@@ -12,23 +12,25 @@ export class LinkedIdentitiesService {
     private linkedIdentityRepository: Repository<LinkedIdentity>
   ){}
 
-  create(createLinkedIdentityDto: CreateLinkedIdentityDto) {
-    return 'This action adds a new linkedIdentity';
+  async create(createLinkedIdentityDto: CreateLinkedIdentityDto) {
+    const newLinkedIdentity: LinkedIdentity = this.linkedIdentityRepository.create(createLinkedIdentityDto)
+    return this.linkedIdentityRepository.save(newLinkedIdentity)
   }
 
-  findAll() {
-    return `This action returns all linkedIdentities`;
+  async findAll() {
+    return await this.linkedIdentityRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} linkedIdentity`;
+  async findOne(id: number) {
+    return await this.linkedIdentityRepository.findOne(id)
   }
 
-  update(id: number, updateLinkedIdentityDto: UpdateLinkedIdentityDto) {
-    return `This action updates a #${id} linkedIdentity`;
+  async update(id: number, updateLinkedIdentityDto: UpdateLinkedIdentityDto) {
+    return this.linkedIdentityRepository.update(id, updateLinkedIdentityDto)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} linkedIdentity`;
+  async remove(id: number) {
+    return await this.linkedIdentityRepository.delete(id)
   }
 }
+ 
