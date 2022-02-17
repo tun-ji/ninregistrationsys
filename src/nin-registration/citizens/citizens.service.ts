@@ -71,4 +71,9 @@ export class CitizensService {
       }, HttpStatus.INTERNAL_SERVER_ERROR)
     };
   }
+  
+  async getRegistered() {
+    const citizens = [await this.citizenRepository.find()]
+    return citizens
+  }
 }

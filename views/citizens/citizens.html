@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="grid-container">
+    <div class="navigation-bar grid-item-row-1">
+        <div class="navigation-bar-left">
+            <div>
+                <a href="/">Home</a>
+            </div>
+            <div>
+                <a href="/about-us">About Us</a>
+            </div>
+            <div>
+                <a href="/views/citizens/create-citizen.html" class="active">Add Citizen</a>
+            </div>
+        </div>
+        <div class="navigation-bar-right">
+            <div>
+                <input type="search">
+                <button>Search</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Nationality</th>
+            <th>Country of Birth</th>
+            <th>State of Birth</th>
+            <th>Town of Birth</th>
+            <th>Address</th>
+            <th>Profession</th>
+            <th>NIN</th>
+            <th>BVN</th>
+            <th>Mobile Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for citizen: in {{citizens}} %}
+            <tr>
+                <td>{{citizen.id}}</td>
+                <td>{{citizen.firstName}}</td>
+                <td>{{citizen.middleName}}</td>
+                <td>{{citizen.lastName}}</td>
+                <td>{{citizen.dateOfBirth}}</td>
+                <td>{{citizen.nationality}}</td>
+                <td>{{citizen.countryOfBirth}}</td>
+                <td>{{citizen.stateOfBirth}}</td>
+                <td>{{citizen.townOfBirth}}</td>
+                <td>{{citizen.residenceAddress}}</td>
+                <td>{{citizen.profession}}</td>
+                <td>{{citizen.linkedIdentity.id}}</td>
+                <td>{{citizen.linkedIdentity.nin}}</td>
+                <td>{{citizen.linkedIdentity.bvn}}</td>
+                <td>{{citizen.linkedIdentity.mobile_number}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

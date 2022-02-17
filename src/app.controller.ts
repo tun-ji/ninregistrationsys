@@ -10,4 +10,6 @@ export class AppController {
   getHome(): {} {
     return this.appService.getHome()
   }
+
+
 }

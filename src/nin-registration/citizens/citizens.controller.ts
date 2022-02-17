@@ -17,6 +17,16 @@ export class CitizensController {
   @Render('citizens/create-citizen')
   createForm(){}
 
+  
+  @Get('return')
+  @Render('citizens/citizens')
+  getRegistered(): {} {
+    return {citizens: this.citizensService.findAll()}
+    // console.log(citizens)
+    // return citizens
+
+  }
+
   @Get()
   findAll() {
     return this.citizensService.findAll();
